@@ -1,7 +1,7 @@
 This is my understanding of [NEAT], so if you want to understand it by yourself, read this (https://neat-python.readthedocs.io/en/latest/config_file.html)
 
 [NEAT]
-fitness_criterion     = max     // choose the best (max) or eliminate the worst (min)
+fitness_criterion     = max     // 
 fitness_threshold     = 100     // Fitness that, when reached, means that probably we don't need more generations (so stop running the program)
 pop_size              = 100     // Initial population size
 reset_on_extinction   = False   // If all species (individuals that are very different from each other) goes extinct -> reset

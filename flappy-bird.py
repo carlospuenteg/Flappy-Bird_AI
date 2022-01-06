@@ -13,14 +13,21 @@ pygame.font.init()
 import neat
 
 
+##############-GAME CONFIG-###############
+
+PIPE_DIST = 600 # x Distance between pipes. Default (600) 
+PIPE_GAP = 200 # y Distance between two pipes. Default (200)
+
+MAX_GEN = 10000 # Maximum number of gens to be created Default (50)
+MAX_RUN_TIME = 0 # After this time, the game stops. Default (0 = No maximum)
+
+FPS = 30  # default (30) - The more FPS, the more velocity, but the more laggy
+
 ##########################################
 
 #-----WINDOW SIZE-----
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
-
-#-----PIPE DISTANCE-----
-PIPE_DIST = 600
 
 #-----IMPORT IMAGES-----
 BIRD_IMGS = [
@@ -33,13 +40,11 @@ BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","base.
 BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bg.png")))
 
 #-----FONTS-----
-STAT_FONT = pygame.font.SysFont("comicsans", 50)
+STAT_FONT = pygame.font.SysFont("roboto", 50)
 
-#-----FPS-----
-FPS = 1000
-
-#-----Gen initialization-----
+#-----Initialization-----
 gens = 0
+maxScore = 0
 ##########################################
 
 class Bird:
@@ -119,7 +124,7 @@ class Bird:
 ##########################################
 
 class Pipe:
-    GAP = 200  # Space between the pipe
+    GAP = PIPE_GAP  # Space between the pipe
     VEL = 5
 
     def __init__(self, x):
@@ -219,7 +224,7 @@ def draw_window(win, birds, pipes, base, score, gen):
 ##########################################
 
 def main(genomes, config):
-    global gens
+    global gens, maxScore
     gens += 1
     nets = []
     ge = []
@@ -241,10 +246,17 @@ def main(genomes, config):
 
     run = True
     while run:
+        if MAX_RUN_TIME:
+            if (time.time() - t1 > MAX_RUN_TIME):
+                print("Max score: "+str(maxScore))
+                run = False
+                pygame.quit()
+                quit()  
         clock.tick(FPS)
         # for each event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print("Max score: "+str(maxScore))
                 run = False
                 pygame.quit()
                 quit()
@@ -303,6 +315,8 @@ def main(genomes, config):
                 nets.pop(x)
                 ge.pop(x)
 
+        if score > maxScore: maxScore = score # Get the highest score
+
         base.move()
         draw_window(win, birds, pipes, base, score, gens)
 
@@ -320,11 +334,14 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    # Calls the main function x times
-    winner = p.run(main,50)
+    # Calls the main function x times (x -> number of generations)
+    winner = p.run(main,MAX_GEN)
 
 
 if __name__ == "__main__":
+    global t1
+    t1 = time.time()
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, "config-feedforward.txt")
     run(config_path)
+    
