@@ -13,11 +13,6 @@ pygame.font.init()
 import neat
 
 
-
-
-
-
-
 ##########################################
 
 #-----WINDOW SIZE-----
@@ -41,7 +36,7 @@ BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bg.png"
 STAT_FONT = pygame.font.SysFont("comicsans", 50)
 
 #-----FPS-----
-FPS = 30
+FPS = 1000
 
 #-----Gen initialization-----
 gens = 0
@@ -325,8 +320,8 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    # Calls the main function 50 times
-    winner = p.run(main, 50)
+    # Calls the main function x times
+    winner = p.run(main,50)
 
 
 if __name__ == "__main__":
