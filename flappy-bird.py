@@ -1,10 +1,22 @@
+#-----IMPORT STANDARD MODULES-----
 import time
 import os
 import random
 
+#-----INSTALL MODULES IF NEEDED-----
+from pipinst import pipin
+if pipin("pygame","neat-python"):
+    exit()
+#-----IMPORT OTHER MODULES-----
 import pygame
 pygame.font.init()
 import neat
+
+
+
+
+
+
 
 ##########################################
 
