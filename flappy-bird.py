@@ -30,6 +30,9 @@ STAT_FONT = pygame.font.SysFont("comicsans", 50)
 
 #-----FPS-----
 FPS = 30
+
+#-----Gen initialization-----
+gens = 0
 ##########################################
 
 class Bird:
@@ -188,7 +191,7 @@ class Base:
 
 ##########################################
 
-def draw_window(win, birds, pipes, base, score):
+def draw_window(win, birds, pipes, base, score, gen):
     win.blit(BG_IMG, (0,0))  # Blit is used to draw
 
     for pipe in pipes: # We can have several pipes on the screen at once
@@ -196,6 +199,9 @@ def draw_window(win, birds, pipes, base, score):
 
     text = STAT_FONT.render("Score: "+str(score), 1, (255,255,255))
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
+
+    gen = STAT_FONT.render("Gen: "+str(gens), 1, (255,255,255))
+    win.blit(gen, (10,10))
 
     base.draw(win)
     for bird in birds:
@@ -206,6 +212,8 @@ def draw_window(win, birds, pipes, base, score):
 ##########################################
 
 def main(genomes, config):
+    global gens
+    gens += 1
     nets = []
     ge = []
     birds = []
@@ -289,7 +297,7 @@ def main(genomes, config):
                 ge.pop(x)
 
         base.move()
-        draw_window(win, birds, pipes, base, score)
+        draw_window(win, birds, pipes, base, score, gens)
 
 ##########################################
 
@@ -306,7 +314,7 @@ def run(config_path):
     p.add_reporter(stats)
 
     # Calls the main function 50 times
-    winner = p.run(main, 50) # 50 are the number generations to run
+    winner = p.run(main, 50)
 
 
 if __name__ == "__main__":
