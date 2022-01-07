@@ -6,6 +6,7 @@ Based on [this](https://youtube.com/playlist?list=PLzMcBGfZo4-lwGZWXz5Qgta_YNX3_
 - [NEAT explanation](https://youtu.be/OGHA-elMrxI)
 
 
+
 ## My additions to the game:
 - Several constants can be changed:
   - Gap between both pipes
