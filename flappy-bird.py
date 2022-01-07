@@ -15,18 +15,31 @@ import neat
 
 ##############-GAME CONFIG-###############
 
-PIPE_DIST = 600 # x Distance between pipes. Default (600) 
-PIPE_GAP = 200 # y Distance between two pipes. Default (200)
-MAX_GEN = 10000 # Maximum number of gens to be created Default (50)
-MAX_RUN_TIME = 60 # After this time, the game stops. Default (0 = No maximum)
-FPS = 60  # default (30) - The more FPS, the more velocity, but the more laggy
-CONFIG = 0  # default (0)
+PIPE_DIST = 600  # Default (600) - x Distance between pipes
+PIPE_GAP = 200 # Default (200) - y Distance between two pipes
+MAX_GEN = 10000  # Default (50) - Maximum number of gens to be created
+MAX_SCORE = 2  # Default (0 = No maximum) - After this score, the game stops
+MAX_RUN_TIME = 10  # Default (0 = No maximum) - After this time, the game stops
+FPS = 30  # Default (30) - The more FPS, the more velocity, but the more laggy
+CONFIG = 0  # Default (0)
+BIRD_VEL = 5  # Default (5) - Velocity of the bird
 
-##########################################
+#############-WINDOW CONFIG-##############
 
 #-----WINDOW SIZE-----
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
+
+#-----CAPTION-----
+pygame.display.set_caption("Flappy Bird")
+
+#-----FONTS-----
+STAT_FONT = pygame.font.SysFont("roboto", 50)
+
+#-----ANIMATION TIME-----
+ANIM_TIME = 5  # Default (5) - Frames the bird takes to change from one to other image
+
+##########################################
 
 #-----IMPORT IMAGES-----
 BIRD_IMGS = [
@@ -38,9 +51,6 @@ PIPE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","pipe.
 BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","base.png")))
 BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bg.png")))
 
-#-----FONTS-----
-STAT_FONT = pygame.font.SysFont("roboto", 50)
-
 #-----Initialization-----
 gens = 0
 maxScore = 0
@@ -50,7 +60,7 @@ class Bird:
     IMGS = BIRD_IMGS  # Easier to self.IMGS
     MAX_ROTATION = 25
     ROT_VEL = 20
-    ANIMATION_TIME = 5
+    ANIMATION_TIME = ANIM_TIME
 
     def __init__(self, x, y):
         self.x = x
@@ -124,7 +134,7 @@ class Bird:
 
 class Pipe:
     GAP = PIPE_GAP  # Space between the pipe
-    VEL = 5
+    VEL = BIRD_VEL
 
     def __init__(self, x):
         self.x = x
@@ -176,7 +186,7 @@ class Pipe:
 ##########################################
 
 class Base:
-    VEL = 5
+    VEL = BIRD_VEL
     WIDTH = BASE_IMG.get_width() # How wide the image is
     IMG = BASE_IMG
 
@@ -245,20 +255,7 @@ def main(genomes, config):
 
     run = True
     while run:
-        if MAX_RUN_TIME:
-            if (time.time() - t1 > MAX_RUN_TIME):
-                print("Max score: "+str(maxScore))
-                run = False
-                pygame.quit()
-                quit()  
         clock.tick(FPS)
-        # for each event
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                print("Max score: "+str(maxScore))
-                run = False
-                pygame.quit()
-                quit()
 
         # Get the first pipe
         pipe_ind = 0
@@ -316,8 +313,25 @@ def main(genomes, config):
 
         if score > maxScore: maxScore = score # Get the highest score
 
+        if MAX_RUN_TIME:
+            if (time.time() - t1 > MAX_RUN_TIME):
+                quitGame() 
+        if MAX_SCORE:
+            if score >= MAX_SCORE: 
+                quitGame()
+        for event in pygame.event.get(): # for each event
+            if event.type == pygame.QUIT:
+                quitGame()
+
         base.move()
         draw_window(win, birds, pipes, base, score, gens)
+
+def quitGame():
+    print("Max score: "+str(maxScore))
+    print("Time: " + str(time.time() - t1) + "\n")
+    #run = False
+    pygame.quit()
+    quit()
 
 ##########################################
 
