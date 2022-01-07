@@ -17,11 +17,10 @@ import neat
 
 PIPE_DIST = 600 # x Distance between pipes. Default (600) 
 PIPE_GAP = 200 # y Distance between two pipes. Default (200)
-
 MAX_GEN = 10000 # Maximum number of gens to be created Default (50)
-MAX_RUN_TIME = 0 # After this time, the game stops. Default (0 = No maximum)
-
-FPS = 30  # default (30) - The more FPS, the more velocity, but the more laggy
+MAX_RUN_TIME = 60 # After this time, the game stops. Default (0 = No maximum)
+FPS = 60  # default (30) - The more FPS, the more velocity, but the more laggy
+CONFIG = 0  # default (0)
 
 ##########################################
 
@@ -342,6 +341,6 @@ if __name__ == "__main__":
     global t1
     t1 = time.time()
     local_dir = os.path.dirname(__file__)
-    config_path = os.path.join(local_dir, "config-feedforward.txt")
+    config_path = os.path.join(local_dir, "configs/config"+str(CONFIG)+".txt")
     run(config_path)
     
