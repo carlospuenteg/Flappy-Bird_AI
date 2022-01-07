@@ -5,7 +5,7 @@ Based on [this](https://youtube.com/playlist?list=PLzMcBGfZo4-lwGZWXz5Qgta_YNX3_
 - [His repository](https://github.com/techwithtim/NEAT-Flappy-Bird)
 - [NEAT explanation](https://youtu.be/OGHA-elMrxI)
 
-I added several things to the previous tutorial:
+## Additions:
 - Several constants can be changed:
   - Gap between both pipes
   - Distance between each two pipes
