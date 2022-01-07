@@ -13,9 +13,11 @@ Based on [this](https://youtube.com/playlist?list=PLzMcBGfZo4-lwGZWXz5Qgta_YNX3_
   - The FPS
   - The configuration (explained later)
   - The bird velocity
+
 - Some display settings can be changed:
   - The window size
   - The caption
   - The fonts
   - The animation time of the bird's animation
+
 - You can add a new [NEAT configuration](https://neat-python.readthedocs.io/en/latest/config_file.html) to the 'config' folder (with the name config1, config2,...)
