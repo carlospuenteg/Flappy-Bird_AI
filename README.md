@@ -10,4 +10,4 @@ You can add a new [NEAT configuration](https://neat-python.readthedocs.io/en/lat
 I added several things to the previous tutorial:
 - Maximum run time and maximum score after which the game stops
 - Several constants that can be changed:
-> Pipe distance
+  - Pipe distance
