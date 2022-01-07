@@ -4,7 +4,7 @@ Flappy Bird game solved with [neat-python](https://neat-python.readthedocs.io/en
 Based on [this](https://youtube.com/playlist?list=PLzMcBGfZo4-lwGZWXz5Qgta_YNX3_vLS2) tutorial:
 - [His repository](https://github.com/techwithtim/NEAT-Flappy-Bird)
 - [NEAT explanation](https://youtu.be/OGHA-elMrxI)
-<br>
+
 ## My additions to the game:
 - Several constants can be changed:
   - Gap between both pipes
