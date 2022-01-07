@@ -5,9 +5,17 @@ Based on [this](https://youtube.com/playlist?list=PLzMcBGfZo4-lwGZWXz5Qgta_YNX3_
 - [His repository](https://github.com/techwithtim/NEAT-Flappy-Bird)
 - [NEAT explanation](https://youtu.be/OGHA-elMrxI)
 
-You can add a new [NEAT configuration](https://neat-python.readthedocs.io/en/latest/config_file.html) to the 'config' folder
-
 I added several things to the previous tutorial:
-- Maximum run time and maximum score after which the game stops
-- Several constants that can be changed:
-  - Pipe distance
+- Several constants can be changed:
+  - Gap between both pipes
+  - Distance between each two pipes
+  - Maximum run time, maximum score and maximum generations after which the game stops
+  - The FPS
+  - The configuration (explained later)
+  - The bird velocity
+- Some display settings can be changed:
+  - The window size
+  - The caption
+  - The fonts
+  - The animation time of the bird's animation
+- You can add a new [NEAT configuration](https://neat-python.readthedocs.io/en/latest/config_file.html) to the 'config' folder (with the name config1, config2,...)
